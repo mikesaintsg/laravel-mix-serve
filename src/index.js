@@ -1,6 +1,5 @@
 const mix = require('laravel-mix')
 const ServePlugin = require('./plugin/ServePlugin');
-const parseCommand = require('./helpers/parseCommand')
 
 class Serve {
     name() {
@@ -11,8 +10,8 @@ class Serve {
         this.userConfig =
             typeof userConfig == 'string'
                 ? (userOption
-                ? Object.assign(parseCommand(userConfig), userOption)
-                : parseCommand(userConfig))
+                ? Object.assign(this.parseCommand(userConfig), userOption)
+                : this.parseCommand(userConfig))
                 : userConfig;
     }
 
@@ -26,6 +25,13 @@ class Serve {
             args: ["artisan", "serve"],
             verbose: true
         }, this.userConfig);
+    }
+
+    parseCommand(string) {
+        return {
+            command: string.split(" ")[0],
+            args: string.split(" ").slice(1)
+        }
     }
 }
 
