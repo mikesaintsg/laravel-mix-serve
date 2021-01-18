@@ -38,7 +38,7 @@ And you're done!
 ## Configuration
 ***
 
- ####Commands
+#### Commands
 Custom commands come in handy for projects outside of Laravel.
 
 ```js
