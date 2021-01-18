@@ -1,27 +1,26 @@
 {
   "name": "laravel-mix-serve",
-  "version": "1.0.1",
-  "description": "Extension for Laravel Mix that runs the serve command.",
-  "main": "index.js",
+  "version": "1.0.0",
+  "description": "Extends Laravel Mix to run the Laravel, or custom, serve command.",
+  "main": "src/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mikesaintsg/laravel-mix-serve.git"
   },
-  "author": {
-    "name": "Michael Garcia"
-  },
-  "license": "MIT",
-  "devDependencies": {
-    "laravel-mix": "^5.0.1"
-  },
   "keywords": [
-    "laravel",
-    "mix",
-    "laravel-mix",
-    "plugin",
-    "extension",
     "serve",
-    "webpack",
-    "webpack-cli"
-  ]
+    "laravel-mix"
+  ],
+  "author": "Michael Garcia",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mikesaintsg/laravel-mix-serve/issues"
+  },
+  "homepage": "https://github.com/mikesaintsg/laravel-mix-serve#readme",
+  "devDependencies": {
+    "laravel-mix": "^6.0.0"
+  },
+  "peerDependencies": {
+    "laravel-mix": "^6.0.0"
+  }
 }
