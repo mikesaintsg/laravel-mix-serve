@@ -10,8 +10,8 @@ class Serve {
         this.userConfig =
             typeof userConfig == 'string'
                 ? (userOption
-                ? Object.assign(this.parseCommand(userConfig), userOption)
-                : this.parseCommand(userConfig))
+                ? Object.assign(this.parseCmd(userConfig), userOption)
+                : this.parseCmd(userConfig))
                 : userConfig;
     }
 
@@ -21,15 +21,15 @@ class Serve {
 
     config() {
         return Object.assign({
-            command: 'php',
+            cmd: 'php',
             args: ["artisan", "serve"],
             verbose: true
         }, this.userConfig);
     }
 
-    parseCommand(string) {
+    parseCmd(string) {
         return {
-            command: string.split(" ")[0],
+            cmd: string.split(" ")[0],
             args: string.split(" ").slice(1)
         }
     }

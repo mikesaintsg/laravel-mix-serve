@@ -17,7 +17,7 @@ class ServePlugin {
     }
 
     runSpawn() {
-        return spawn(this.config.command, this.config.args);
+        return spawn(this.config.cmd, this.config.args);
     }
 
     runSpawnVerbose() {
