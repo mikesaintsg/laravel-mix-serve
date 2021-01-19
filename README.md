@@ -39,8 +39,7 @@ And you're done!
 ***
 
 #### Commands
-Custom commands come in handy for projects outside of Laravel.
-
+Custom commands are handy for projects outside of Laravel.
 ```js
 // String Command
 mix.serve('npm run start');
@@ -48,6 +47,16 @@ mix.serve('npm run start');
 // Object Command
 mix.serve({ cmd: 'npm', args: ['run', 'start']});
 ```
+Custom commands are just as handy when you want to extend your `php artisan serve` command to include custom parameters.
+
+```js
+// String Command
+mix.serve('php artisan serve --port=8888');
+
+// Object Command
+mix.serve({ cmd: 'php', args: ['artisan', 'serve', '--port=8888']});
+```
+
 >
 > The use of an Object comes from the way that the `spawn` method of the `child_process` module is used.
 
@@ -72,7 +81,7 @@ mix.serve({
 > 
 >For Laravel users, if you want to still be sure that your server is up while not losing the place of your compiled mix output, you can also use the option `'once'`.
 > 
-> For example, if you only want the default Laravel output of:
+>For example, if you only want the default Laravel output of:
 > 
 >`Starting Laravel development server: http://127.0.0.1:8000`
 
