@@ -6,7 +6,7 @@
 [![npm](https://img.shields.io/npm/dt/laravel-mix-serve.svg?style=flat-square)](https://www.npmjs.com/package/laravel-mix-serve)
 
 This package extends Laravel Mix to run the `php artisan serve` command by default, or any custom command, within the same shell after the mix command has been executed.
-##<a id="table-contents">Table of Contents</a>
+### <a id="table-contents">Table of Contents</a>
 ***
 1. **<a href="#usage">Usage</a>**
 2. **<a href="#configuration">Configuration</a>**
