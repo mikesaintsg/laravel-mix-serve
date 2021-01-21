@@ -8,7 +8,7 @@ class VerbosePlugin {
 
 	output() {
 		this.server.stdout.on("data", data => {
-			if(this.count) console.log(`\n${data}`);
+			if(this.count) console.log(`${data}`);
 			if(this.options === 'once') this.count = false;
 		});
 	}

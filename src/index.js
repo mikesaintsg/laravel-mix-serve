@@ -7,6 +7,11 @@ class Serve {
     }
 
     register(userConfig, userOption) {
+        if(userOption){
+            if(userOption.cmd) delete userOption.cmd
+            if(userOption.args) delete userOption.args
+        }
+
         this.userConfig =
             typeof userConfig == 'string'
                 ? (userOption
@@ -23,14 +28,18 @@ class Serve {
         return Object.assign({
             cmd: 'php',
             args: ["artisan", "serve"],
-            verbose: true
+            verbose: true,
+            watch: true,
+            dev: true,
+            prod: false
         }, this.userConfig);
     }
 
     parseCmd(string) {
+        let [cmd, ...args] = string.split(" ")
         return {
-            cmd: string.split(" ")[0],
-            args: string.split(" ").slice(1)
+            cmd: cmd,
+            args: args
         }
     }
 }
