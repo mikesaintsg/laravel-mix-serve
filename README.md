@@ -16,6 +16,7 @@ This package extends Laravel Mix to run the `php artisan serve` command by defau
    - <a href="#configuration-watch">Watch (ver 2.1.0)</a>
    - <a href="#configuration-development">Development (ver 2.1.0)</a>
    - <a href="#configuration-production">Production (ver 2.1.0)</a>
+   - <a id="configuration-hook">Hook (ver 2.2.0)</a>
 3. **<a href="#credits">Credits</a>**
 4. **<a href="#license">License (MIT)</a>**
 <br>
@@ -145,6 +146,18 @@ mix.serve({ prod: true });
 // with String Command
 mix.serve('npm run start', { prod: true });
 ```
+
+#### <a id="configuration-hook">Hook (ver 2.2.0)</a>
+You can choose on which compiler hook your command should run. By default, the command will run on the `afterCompile` hook.
+```js
+// Object
+mix.serve({ hook: 'beforeCompile' });
+
+// with String Command
+mix.serve('npm run start', { prod: 'beforeCompile' });
+```
+
+>You can see all of the options available on the [Webpack](https://webpack.js.org/api/compiler-hooks/) website.
 
 ## <a id="credits">Credits</a>
 <a href="#usage">Back to Top</a>
