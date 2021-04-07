@@ -16,7 +16,7 @@ This package extends Laravel Mix to run the `php artisan serve` command by defau
    - <a href="#configuration-watch">Watch (ver 2.1.0)</a>
    - <a href="#configuration-development">Development (ver 2.1.0)</a>
    - <a href="#configuration-production">Production (ver 2.1.0)</a>
-   - <a id="configuration-hook">Hook (ver 2.2.0)</a>
+   - <a href="#configuration-hook">Hook (ver 2.2.0)</a>
 3. **<a href="#credits">Credits</a>**
 4. **<a href="#license">License (MIT)</a>**
 <br>
