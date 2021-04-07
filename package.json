@@ -1,6 +1,6 @@
 {
   "name": "laravel-mix-serve",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Extends Laravel Mix to run the Laravel, or custom, serve command.",
   "main": "src/index.js",
   "repository": {
