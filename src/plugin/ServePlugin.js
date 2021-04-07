@@ -13,19 +13,15 @@ class ServePlugin {
 
     apply(compiler) {
         this.watchRunStatus(compiler);
-        this.afterCompile(compiler);
+        compiler.hooks[this.config.hook].tap('ServePlugin', (compilation) => {
+            this.onWatch()
+            this.inDev()
+            this.inProduction()
+        })
     }
 
     watchRunStatus(compiler){
         compiler.hooks.watchRun.tap('ServePlugin', (compilation) => { this.watchRun = true });
-    }
-
-    afterCompile(compiler){
-        mix.after(stats => {
-            this.onWatch()
-            this.inDev()
-            this.inProduction()
-        });
     }
 
     onWatch() {
@@ -52,8 +48,7 @@ class ServePlugin {
     }
 
     runSpawn() {
-
-        return spawn(this.config.cmd, this.config.args, {shell: process.platform === 'win32'})
+        return spawn(this.config.cmd, this.config.args, {shell: true})
     }
 
     runSpawnVerbose() {

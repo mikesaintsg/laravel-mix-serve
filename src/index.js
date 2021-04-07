@@ -31,7 +31,8 @@ class Serve {
             verbose: true,
             watch: true,
             dev: true,
-            prod: false
+            prod: false,
+            hook: 'afterCompile'
         }, this.userConfig);
     }
 
