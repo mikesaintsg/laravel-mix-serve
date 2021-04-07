@@ -154,7 +154,7 @@ You can choose on which compiler hook your command should run. By default, the c
 mix.serve({ hook: 'beforeCompile' });
 
 // with String Command
-mix.serve('npm run start', { prod: 'beforeCompile' });
+mix.serve('npm run start', { hook: 'beforeCompile' });
 ```
 
 >You can see all of the options available on the [Webpack](https://webpack.js.org/api/compiler-hooks/) website.
