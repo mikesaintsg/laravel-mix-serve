@@ -52,7 +52,8 @@ class ServePlugin {
     }
 
     runSpawn() {
-        return spawn(this.config.cmd, this.config.args);
+
+        return spawn(this.config.cmd, this.config.args, {shell: process.platform === 'win32'})
     }
 
     runSpawnVerbose() {
