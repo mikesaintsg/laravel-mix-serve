@@ -1,17 +1,20 @@
 class VerbosePlugin {
-	constructor(server, options) {
-		this.server = server;
-		this.options = options;
-		this.count = true
+	count = true
+
+	constructor(spawned, config) {
+		this.spawned = spawned;
+		this.config = config;
+
 		this.output()
 	}
 
 	output() {
-		this.server.stdout.on("data", data => {
-			if(this.count) console.log(`${data}`);
-			if(this.options === 'once') this.count = false;
+		this.spawned.stdout.on("data", data => {
+			if (this.count) process.stdout.write(data.toString());
+			if (this.config.verbose === 'once') this.count = false;
 		});
 	}
 }
 
 module.exports = VerbosePlugin;
+

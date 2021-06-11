@@ -1,58 +1,62 @@
 const mix = require('laravel-mix')
-const { spawn } = require("child_process");
+const {spawn} = require("child_process");
 
 const VerbosePlugin = require('./VerbosePlugin');
 
 class ServePlugin {
+    spawned = false
+
+    modes = {
+        prod: mix.inProduction(),
+        dev: !mix.inProduction(),
+        watch: false
+    }
+
     constructor(config) {
-        this.config = config;
-        this.watchRun = false
-        this.spawnHasRun = false
-        this.onProduction = mix.inProduction()
+        this.config = config
     }
 
     apply(compiler) {
-        this.watchRunStatus(compiler);
-        compiler.hooks[this.config.hook].tap('ServePlugin', (compilation) => {
-            this.onWatch()
-            this.inDev()
-            this.inProduction()
-        })
+        this.watchStatus(compiler);
+
+        compiler.hooks[this.config.hook]
+            .tap('ServePlugin', () =>
+                this.spawnConditions(() =>
+                    this.determineSpawn()));
     }
 
-    watchRunStatus(compiler){
-        compiler.hooks.watchRun.tap('ServePlugin', (compilation) => { this.watchRun = true });
+    watchStatus(compiler) {
+        compiler.hooks.watchRun
+            .tap('ServePlugin', () =>
+                this.modes.watch = true);
     }
 
-    onWatch() {
-        if(this.watchRun === true && this.config.watch === true && this.spawnHasRun === false) {
-            return this.determineSpawn();
+    spawnConditions(callback){
+        if (this.spawned) return;
+
+        for (const mode in this.modes) {
+            if(this.modes[mode] === true && this.config[mode] === false) {
+                if(mode === 'dev' && this.modes.watch === true) continue;
+
+                return;
+            }
         }
-    }
 
-    inProduction() {
-        if(this.onProduction === true && this.config.prod === true && this.spawnHasRun === false) {
-            return this.determineSpawn();
-        }
-    }
-
-    inDev() {
-        if(this.onProduction === false && this.config.dev === true && this.spawnHasRun === false) {
-            return this.determineSpawn();
-        }
+        callback()
     }
 
     determineSpawn() {
-        this.config.verbose ? this.runSpawnVerbose() : this.runSpawn()
-        this.spawnHasRun = true;
+        this.config.verbose
+            ? this.runSpawnVerbose()
+            : this.runSpawn()
     }
 
     runSpawn() {
-        return spawn(this.config.cmd, this.config.args, {shell: true})
+        return this.spawned = spawn(this.config.cmd, this.config.args, {shell: true})
     }
 
     runSpawnVerbose() {
-        return new VerbosePlugin(this.runSpawn(), this.config.verbose)
+        return new VerbosePlugin(this.runSpawn(), this.config)
     }
 }
 

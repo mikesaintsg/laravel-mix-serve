@@ -7,17 +7,15 @@ class Serve {
     }
 
     register(userConfig, userOption) {
-        if(userOption){
-            if(userOption.cmd) delete userOption.cmd
-            if(userOption.args) delete userOption.args
-        }
+        this.userConfig = typeof userConfig === 'string'
+            ? this.parseCmd(userConfig)
+            : userConfig;
 
-        this.userConfig =
-            typeof userConfig == 'string'
-                ? (userOption
-                ? Object.assign(this.parseCmd(userConfig), userOption)
-                : this.parseCmd(userConfig))
-                : userConfig;
+        if (userOption) {
+            if (userOption.cmd) delete userOption.cmd;
+            if (userOption.args) delete userOption.args;
+            Object.assign(this.userConfig, userOption)
+        }
     }
 
     webpackPlugins() {
@@ -25,15 +23,16 @@ class Serve {
     }
 
     config() {
-        return Object.assign({
+        return {
             cmd: 'php',
             args: ["artisan", "serve"],
             verbose: true,
             watch: true,
             dev: true,
             prod: false,
-            hook: 'afterCompile'
-        }, this.userConfig);
+            hook: 'afterCompile',
+            ...this.userConfig
+        };
     }
 
     parseCmd(string) {
